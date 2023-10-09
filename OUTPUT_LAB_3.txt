@@ -1,0 +1,11 @@
+ -- Approximation de PI par Monte Carlo --
+
+ -- Simulations = 1000
+
+ * PI = 3.212000
+ -- Simulations = 1000000
+
+ * PI = 3.141112
+ -- Simulations = 1000000000
+
+ * PI = 3.141658
