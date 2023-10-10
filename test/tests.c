@@ -3,88 +3,120 @@
 
 #include <math.h>
 
-#include "tests.h"
 #include "../simulation/simulation.h"
+#include "tests.h"
 
-
-/**
- * @brief Calculate the mean of an array of values.
- * 
- * This function calculates the mean of a given array of values.
- * 
- * @param array The array of values.
- * @param size The size of the array.
- * 
- * @return The mean of the values in the array.
- */
-
-double calculateMean(double * array, int size)
-{
-    double sum = 0;
-
-    for (int i = 0; i < size; i++)
-    {
-        sum+=array[i];
-    }
-
-    return sum / size;
-}
+const double alpha_0_01_values[] = {
+    63.657, 9.925, 5.841, 4.604, 4.032, 3.707, 3.499, 3.355, 3.250, 3.169,
+    3.106, 3.055, 3.012, 2.977, 2.947, 2.921, 2.898, 2.878, 2.861, 2.845,
+    2.831, 2.819, 2.807, 2.797, 2.787, 2.779, 2.771, 2.763, 2.756, 2.750
+};
 
 void testSimPi()
 {
-    int    numSimulations;
-    double pi;
+    int    numSimulations[] = {1000, 1000000, 1000000000};
+    double estimatedPi;
 
     printf("\n -- Approximation de PI par Monte Carlo --\n");
-    numSimulations = 1000;
-    printf("\n -- Simulations = 1 000\n");
-    pi = simPi(numSimulations);
-    printf("\n * PI = %f", pi);
 
-    numSimulations = 1000000;
-    printf("\n -- Simulations = 1 000 000\n");
-    pi = simPi(numSimulations);
-    printf("\n * PI = %f", pi);
-
-    numSimulations = 1000000000;
-    printf("\n -- Simulations = 1 000 000 000\n");
-    pi = simPi(numSimulations);
-    printf("\n * PI = %f", pi);
-
-
+    for (int i = 0; i < 3; i++)
+    {
+        estimatedPi = simPi(numSimulations[i]);
+        printf("\n * Estimation with %d points : estimated PI = %f\n",  numSimulations[i], estimatedPi);
+    }
+    
 }
 
 
 
-void testMeanPi(int numSimulations)
+void testMeanPi(int numExperiments)
 {
-    double array1[10];
-    double array2[40];
-
     double estimatedPi;
-    double meanPi;
+    double absoluteError;
+    double relativeError;
+
+    int    numSimulations[] = {1000, 1000000, 1000000000};
+    double meanPi[3]        = {0.};
 
     printf ("\n-- Computing independent experiments and obtaining the mean\n");
-    printf("\n-- Simulations = %d\n", numSimulations);
 
-    for (int i = 0; i < 10; i++)
+    int i, j;
+    
+    for (i = 0; i < 3; i++)
     {
-        estimatedPi = simPi(numSimulations);
-        array1[i]   = estimatedPi;   
+        for (j = 0; j < numExperiments; j++)
+        {
+            estimatedPi = simPi(numSimulations[i]);
+            meanPi[i]   += estimatedPi;
+        }
+    
+        // Compute the mean
+        meanPi[i] = meanPi[i] / numExperiments;
+
+        // Absolute and relative errors
+        absoluteError = fabs(meanPi[i] - M_PI);
+        relativeError = absoluteError / M_PI;
+
+        // Display tests results
+        printf("\n* Mean estimation of PI with %d simulations and %d experiments : %f\n", numSimulations[i], numExperiments, estimatedPi);
+        printf("-- Absolute error : %f \n", absoluteError);
+        printf("-- Relative error : %f\n", relativeError);  
     }
 
-    meanPi = calculateMean(array1, 10);
-    printf("\n* Average (out of 10 experiments) : %f \n", meanPi);
-    printf("\n* Difference with M_PI : %f \n", fabs(M_PI - meanPi));
+}
 
-    for (int i = 0; i < 40; i++)
+
+void testConfidenceInterval()
+{
+    double estimatedPi[NMAX];
+    double estimatedStdDeviation;
+
+    double criticalValue;
+    double confidenceValue;
+
+    double meanPi;
+
+    int    numReplicates;
+    int    numSimulations = 1000;
+
+    printf("Enter the number of replicates (experiments) : ");
+    scanf("%d", &numReplicates);
+
+    int i;
+    for (i = 0; i < numReplicates; i++)
     {
-        estimatedPi = simPi(numSimulations);
-        array2[i]   = estimatedPi;
+        estimatedPi[i] = simPi(numSimulations);
+        meanPi      += estimatedPi[i];
+    }
+    
+    // Compute the mean
+    meanPi = meanPi / numReplicates;
+
+    estimatedStdDeviation = calculateEstimatedVariance(estimatedPi, meanPi, numReplicates);
+    criticalValue = alpha_0_01_values[numReplicates];
+
+    confidenceValue = criticalValue * sqrt(estimatedStdDeviation / numReplicates);
+
+    printf("\n -- Mean Estimation with %d simulations and %d replicates: %f\n", numSimulations, numReplicates, meanPi);
+    printf("\n* Estimated standard Deviation: %f\n", estimatedStdDeviation);
+    printf("\n* 99%% Confidence Interval: %f +/- %f %%\n", meanPi, confidenceValue * 100);
+
+
+
+
+}
+
+double calculateEstimatedVariance(double * X, double meanX, int n)
+{
+    double sum = 0;
+    double estimatedVariance;
+
+    for (int i = 0; i < n; i++)
+    {
+        sum += (X[i] - meanX) * (X[i] - meanX);
     }
 
-    meanPi = calculateMean(array2, 40);
-    printf("\n* Average (out of 10 experiments) : %f \n", meanPi);
-    printf("\n* Difference with M_PI : %f \n", fabs(M_PI - meanPi));
+    estimatedVariance = sum / (n - 1);
 
+    return estimatedVariance;
 }

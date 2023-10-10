@@ -1,11 +1,10 @@
 #ifndef __TESTS_H__
 #define __TESTS_H__
 
-#define M_PI		3.14159265358979323846
-
 void testSimPi();
 void testMeanPi(int numSimulations);
+void testConfidenceInterval();
 
-double calculateMean(double * array, int size);
+double calculateEstimatedVariance(double * X, double meanX, int n);
 
 #endif

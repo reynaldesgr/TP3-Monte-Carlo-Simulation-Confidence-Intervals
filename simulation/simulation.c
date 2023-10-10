@@ -36,5 +36,5 @@ double simPi(int numSimulations)
         }
     }
 
-    return 4 * ((double) nbPoints/numSimulations);
+    return 4. * ((double) nbPoints/numSimulations);
 }

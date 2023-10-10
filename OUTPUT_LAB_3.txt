@@ -1,11 +1,18 @@
  -- Approximation de PI par Monte Carlo --
 
- -- Simulations = 1000
+ * Estimation with 1000 points : estimated PI = 3.124000
 
- * PI = 3.212000
- -- Simulations = 1000000
+ * Estimation with 1000000 points : estimated PI = 3.144720
 
- * PI = 3.141112
- -- Simulations = 1000000000
+ * Estimation with 1000000000 points : estimated PI = 3.141541
 
- * PI = 3.141658
+
+-- Computing independent experiments and obtaining the mean
+
+ * Mean estimation of PI with 1000 simulations and 10 experiments : 3.124000
+-- Absolute error : 0.006407
+-- Relative error : 0.002040
+
+* Mean estimation of PI with 1000000 simulations and 10 experiments : 3.142216
+-- Absolute error : 0.000338 
+-- Relative error : 0.000108

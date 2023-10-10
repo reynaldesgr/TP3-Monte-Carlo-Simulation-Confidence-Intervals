@@ -16,6 +16,10 @@ static int mti=N+1; /* mti==N+1 means mt[N] is not initialized */
 
 /* initializes mt[N] with a seed */
 void init_genrand(unsigned long s);
+
+/* initializes with an array */
+void init_by_array(unsigned long init_key[], int key_length);
+
 /* generates a random number on [0,0xffffffff]-interval */
 unsigned long genrand_int32(void);
 /* generates a random number on [0,0x7fffffff]-interval */
@@ -31,5 +35,6 @@ double genrand_res53(void);
 
 /* Matsumoto's main */
 int matsumoto_main(void);
+
 
 #endif

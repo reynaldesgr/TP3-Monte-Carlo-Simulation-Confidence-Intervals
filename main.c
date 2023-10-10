@@ -13,12 +13,18 @@ int main (void)
     //testSimPi();
 
     // 2 - Independent experiments
-    // Simulation = 1000
-    testMeanPi(1000);
-    // Simulation = 1000 000
-    //testMeanPi(1000000);
-    // Simulation = 1000 000 000
-    //testMeanPi(1000000000);
+
+    // Number of replicates = 10
+    //testMeanPi(10);
+
+    // Number of replicates = 30
+    //testMeanPi(30);
+
+    // Number of replicates = 40
+    //testMeanPi(40);
+
+    // 3 - Confidence intervals
+    testConfidenceInterval();
 
     return 0;
 }
