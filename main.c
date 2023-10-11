@@ -12,7 +12,7 @@ int main (void)
     // 1 - SimPi function
     testSimPi();
 
-    // 2 - Independent experiments
+    /*// 2 - Independent experiments
 
     // Number of replicates = 10
     testMeanPi(10);
@@ -24,7 +24,7 @@ int main (void)
     testMeanPi(40);
 
     // 3 - Confidence intervals
-    testConfidenceInterval();
+    testConfidenceInterval();*/
 
     return 0;
 }

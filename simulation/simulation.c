@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "../mt/matsumoto.h"
 
 /**
@@ -30,9 +31,14 @@ double simPi(int numSimulations)
         xr = uniform(0, 1);
         yr = uniform(0, 1);
 
-        if ( (xr*xr) + (yr*yr) < 1)
+        if ( (xr*xr) + (yr*yr) <= 1)
         {
             nbPoints++;
+            printf("(%f, %f, 'Accepted'),\n", xr, yr);
+        }
+        else
+        {
+            printf("(%f, %f, 'Rejected'),\n", xr, yr); 
         }
     }
 

@@ -14,7 +14,7 @@ const double alpha_0_01_values[] = {
 
 void testSimPi()
 {
-    int    numSimulations[] = {1000, 1000000, 10000000};
+    int    numSimulations[] = {1000, 1000000, 1000000000};
     double estimatedPi;
 
     printf("\n -- Approximation de PI par Monte Carlo --\n");
