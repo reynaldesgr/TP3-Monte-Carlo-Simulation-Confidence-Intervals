@@ -14,7 +14,7 @@ const double alpha_0_01_values[] = {
 
 void testSimPi()
 {
-    int    numSimulations[] = {1000, 1000000, 1000000000};
+    int    numSimulations[] = {1000, 1000000, 10000000};
     double estimatedPi;
 
     printf("\n -- Approximation de PI par Monte Carlo --\n");
@@ -35,7 +35,7 @@ void testMeanPi(int numExperiments)
     double absoluteError;
     double relativeError;
 
-    int    numSimulations[] = {1000, 1000000, 1000000000};
+    int    numSimulations[] = {1000, 1000000, 10000000};
     double meanPi[3]        = {0.};
 
     printf ("\n-- Computing independent experiments and obtaining the mean\n");
@@ -93,17 +93,21 @@ void testConfidenceInterval()
     meanPi = meanPi / numReplicates;
 
     estimatedStdDeviation = calculateEstimatedVariance(estimatedPi, meanPi, numReplicates);
-    criticalValue = alpha_0_01_values[numReplicates];
+    
+    if (numReplicates <= 30)
+    {
+        criticalValue = alpha_0_01_values[numReplicates - 1];
+    }
+    else
+    {
+        criticalValue = 2.576; // for n -> infinity
+    }
 
     confidenceValue = criticalValue * sqrt(estimatedStdDeviation / numReplicates);
 
     printf("\n -- Mean Estimation with %d simulations and %d replicates: %f\n", numSimulations, numReplicates, meanPi);
     printf("\n* Estimated standard Deviation: %f\n", estimatedStdDeviation);
-    printf("\n* 99%% Confidence Interval: %f +/- %f %%\n", meanPi, confidenceValue * 100);
-
-
-
-
+    printf("\n* 99%% Confidence Interval: [%f-%f] %%\n", meanPi - confidenceValue, meanPi + confidenceValue);
 }
 
 double calculateEstimatedVariance(double * X, double meanX, int n)
@@ -115,7 +119,6 @@ double calculateEstimatedVariance(double * X, double meanX, int n)
     {
         sum += (X[i] - meanX) * (X[i] - meanX);
     }
-
     estimatedVariance = sum / (n - 1);
 
     return estimatedVariance;

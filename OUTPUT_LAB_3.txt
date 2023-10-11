@@ -7,12 +7,70 @@
  * Estimation with 1000000000 points : estimated PI = 3.141541
 
 
+
+
+
+
 -- Computing independent experiments and obtaining the mean
 
- * Mean estimation of PI with 1000 simulations and 10 experiments : 3.124000
--- Absolute error : 0.006407
--- Relative error : 0.002040
+* Mean estimation of PI with 1000 simulations and 10 experiments : 3.072000
+-- Absolute error : 0.017193 
+-- Relative error : 0.005473
 
-* Mean estimation of PI with 1000000 simulations and 10 experiments : 3.142216
--- Absolute error : 0.000338 
--- Relative error : 0.000108
+* Mean estimation of PI with 1000000 simulations and 10 experiments : 3.139092
+-- Absolute error : 0.000616 
+-- Relative error : 0.000196
+
+* Mean estimation of PI with 10000000 simulations and 10 experiments : 3.141837
+-- Absolute error : 0.000031 
+-- Relative error : 0.000010
+
+
+
+
+
+
+
+-- Computing independent experiments and obtaining the mean
+
+* Mean estimation of PI with 1000 simulations and 30 experiments : 3.124000
+-- Absolute error : 0.002807 
+-- Relative error : 0.000894
+
+* Mean estimation of PI with 1000000 simulations and 30 experiments : 3.135692
+-- Absolute error : 0.000135 
+-- Relative error : 0.000043
+
+* Mean estimation of PI with 10000000 simulations and 30 experiments : 3.142671
+-- Absolute error : 0.000069 
+-- Relative error : 0.000022
+
+
+
+
+
+
+-- Computing independent experiments and obtaining the mean
+
+* Mean estimation of PI with 1000 simulations and 40 experiments : 3.128000
+-- Absolute error : 0.002307 
+-- Relative error : 0.000734
+
+* Mean estimation of PI with 1000000 simulations and 40 experiments : 3.139524
+-- Absolute error : 0.000355 
+-- Relative error : 0.000113
+
+* Mean estimation of PI with 10000000 simulations and 40 experiments : 3.141365
+-- Absolute error : 0.000092 
+-- Relative error : 0.000029
+
+
+
+Enter the number of replicates (experiments) : 25
+
+
+ -- Mean Estimation with 1000 simulations and 25 replicates: 3.258775
+
+* Estimated standard Deviation: 0.019160
+
+* 99% Confidence Interval: 3.258775 +/- 7.693294 % (0.07683294)
