@@ -31,7 +31,7 @@ double uniform(double a, double b)
  * 
  * This function uses the Monte Carlo method to estimate the value of Pi.
  * It generate a specified number of random points (numSimulations points) within
- * a square and counts how many fall inside into the quarter of a unit circle
+ * a square and counts how many fall inside into the first quarter of a unit circle
  * inscribed in that square.
  * 
  * The ratio of points inside the circle to the total number of points
