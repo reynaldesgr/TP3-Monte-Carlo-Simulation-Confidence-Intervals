@@ -1,10 +1,30 @@
+/**
+ * @file tests.c
+ * 
+ * @brief Tests for approximating pi using Monte Carlo methods.
+ * 
+ * This file contains functions to test and approximate the value of pi.
+ * 
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
 #include <math.h>
 
 #include "../simulation/simulation.h"
+#include "../imath/math_utility.h"
 #include "tests.h"
+
+/**
+ * @brief Array of critical values for the Student's t-distribution 
+ * at 99.9% confidence (alpha = 0.01)
+ * 
+ * This array contains critical values associated with the Student's t-distribution
+ * for various sample sizes.
+ * If the sample size / number of replicates is greater than the size of the array (= 30)
+ * then the value is approximated for n which tends towards infinity (= 2.576 for alpha = 0.01)
+ * 
+*/
 
 const double alpha_0_01_values[] = {
     63.657, 9.925, 5.841, 4.604, 4.032, 3.707, 3.499, 3.355, 3.250, 3.169,
@@ -12,14 +32,23 @@ const double alpha_0_01_values[] = {
     2.831, 2.819, 2.807, 2.797, 2.787, 2.779, 2.771, 2.763, 2.756, 2.750
 };
 
+
+/**
+ * @brief Test the estimation of Pi with different number of simulations.
+ * 
+ * This function tests the estimation of Pi using simPi() function with
+ * different numbers of simulations and then displays the results.
+ * 
+*/
+
 void testSimPi()
 {
-    int    numSimulations[] = {1000, 1000000, 1000000000};
+    int    numSimulations[] = {1000, 10000, 1000000000};
     double estimatedPi;
 
     printf("\n -- Approximation de PI par Monte Carlo --\n");
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 2; i < 3; i++)
     {
         estimatedPi = simPi(numSimulations[i]);
         printf("\n * Estimation with %d points : estimated PI = %f\n",  numSimulations[i], estimatedPi);
@@ -27,7 +56,16 @@ void testSimPi()
     
 }
 
-
+/**
+ * @brief Test and perform multiple independent replicates to obtain the mean
+ * estimate of pi.
+ * 
+ * This function runs multiple independent experiments, each using simPi() function,
+ * and compute the mean estimate of Pi along with absolute and relative errors.
+ * 
+ * @param numExperiments The number of independ experiments to perform.
+ * 
+*/
 
 void testMeanPi(int numExperiments)
 {
@@ -65,6 +103,14 @@ void testMeanPi(int numExperiments)
 
 }
 
+/**
+ * @brief Calculate the mean estimate, estimated standard deviation, and finally 
+ * the confidence interval of pi.
+ * 
+ * This function calculates the mean estimate of pi, its standard deviation, and a confidence
+ * interval for the estimate using the specified number of replicates (n).
+ * 
+*/
 
 void testConfidenceInterval()
 {
@@ -108,18 +154,4 @@ void testConfidenceInterval()
     printf("\n -- Mean Estimation with %d simulations and %d replicates: %f\n", numSimulations, numReplicates, meanPi);
     printf("\n* Estimated standard Deviation: %f\n", estimatedStdDeviation);
     printf("\n* 99%% Confidence Interval: [%f-%f] %%\n", meanPi - confidenceValue, meanPi + confidenceValue);
-}
-
-double calculateEstimatedVariance(double * X, double meanX, int n)
-{
-    double sum = 0;
-    double estimatedVariance;
-
-    for (int i = 0; i < n; i++)
-    {
-        sum += (X[i] - meanX) * (X[i] - meanX);
-    }
-    estimatedVariance = sum / (n - 1);
-
-    return estimatedVariance;
 }

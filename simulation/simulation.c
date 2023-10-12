@@ -1,3 +1,11 @@
+/**
+ * @file simulation.c
+ * 
+ * @brief This file contains functions for performing simulations 
+ * and generate pseudo-random numbers.
+ * 
+*/
+
 #include <stdio.h>
 #include "../mt/matsumoto.h"
 
@@ -18,13 +26,29 @@ double uniform(double a, double b)
 }
 
 
+/**
+ * @brief Approximate the value of Pi using the Monte Carlo method.
+ * 
+ * This function uses the Monte Carlo method to estimate the value of Pi.
+ * It generate a specified number of random points (numSimulations points) within
+ * a square and counts how many fall inside into the quarter of a unit circle
+ * inscribed in that square.
+ * 
+ * The ratio of points inside the circle to the total number of points
+ * is used to estimate Pi.
+ * 
+ * @param numSimulations Number of simulations to run, each simulation draw a random point.
+ * 
+ * @return The estimated value of Pi.
+*/
+
 double simPi(int numSimulations)
 {
     double xr, yr;
     int    i;
-    int    nbPoints;
+    int    nbPointsInCircle;
 
-    nbPoints = 0;
+    nbPointsInCircle = 0;
 
     for (i = 0; i < numSimulations; i++)
     {
@@ -33,14 +57,9 @@ double simPi(int numSimulations)
 
         if ( (xr*xr) + (yr*yr) <= 1)
         {
-            nbPoints++;
-            printf("(%f, %f, 'Accepted'),\n", xr, yr);
-        }
-        else
-        {
-            printf("(%f, %f, 'Rejected'),\n", xr, yr); 
+            nbPointsInCircle++;
         }
     }
 
-    return 4. * ((double) nbPoints/numSimulations);
+    return 4. * ( (double) (nbPointsInCircle / numSimulations) );
 }
