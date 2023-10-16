@@ -16,10 +16,12 @@ int main (void)
 
     //Number of replicates = 10
     testMeanPi(10);
-
+    testMeanPi(15);
+    testMeanPi(20);
+    testMeanPi(25);
     // Number of replicates = 30
     testMeanPi(30);
-
+    testMeanPi(35);
     // Number of replicates = 40
     testMeanPi(40);
 
