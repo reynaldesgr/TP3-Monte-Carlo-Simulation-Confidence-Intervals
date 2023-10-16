@@ -1,60 +1,56 @@
- -- Approximation de PI par Monte Carlo --
+-- Approximation de PI par Monte Carlo --
 
  * Estimation with 1000 points : estimated PI = 3.124000
 
- * Estimation with 1000000 points : estimated PI = 3.144720
+ * Estimation with 10000 points : estimated PI = 3.158000
 
- * Estimation with 10000000 points : estimated PI = 3.141168
-
-
--- Computing independent experiments and obtaining the mean
-
-* Mean estimation of PI with 1000 simulations and 10 experiments : 3.212000
--- Absolute error : 0.009207 
--- Relative error : 0.002931
-
-* Mean estimation of PI with 1000000 simulations and 10 experiments : 3.140748
--- Absolute error : 0.000885 
--- Relative error : 0.000282
-
-* Mean estimation of PI with 10000000 simulations and 10 experiments : 3.142442
--- Absolute error : 0.000143 
--- Relative error : 0.000045
-
+ * Estimation with 1000000000 points : estimated PI = 3.141545
 
 -- Computing independent experiments and obtaining the mean
 
-* Mean estimation of PI with 1000 simulations and 30 experiments : 3.132000
--- Absolute error : 0.004541 
--- Relative error : 0.001445
+* Mean estimation of PI with 1000 simulations and 10 experiments : 3.124000
+-- Absolute error : 0.006407
+-- Relative error : 0.002040
 
-* Mean estimation of PI with 1000000 simulations and 30 experiments : 3.140732
--- Absolute error : 0.000203 
--- Relative error : 0.000064
+* Mean estimation of PI with 1000000 simulations and 10 experiments : 3.142216
+-- Absolute error : 0.000338 
+-- Relative error : 0.000108
 
-* Mean estimation of PI with 10000000 simulations and 30 experiments : 3.141350
--- Absolute error : 0.000014 
--- Relative error : 0.000004
-
+* Mean estimation of PI with 10000000 simulations and 10 experiments : 3.141706
+-- Absolute error : 0.000304 
+-- Relative error : 0.000097
 
 -- Computing independent experiments and obtaining the mean
 
-* Mean estimation of PI with 1000 simulations and 40 experiments : 3.112000
--- Absolute error : 0.003207 
--- Relative error : 0.001021
+* Mean estimation of PI with 1000 simulations and 30 experiments : 3.172000
+-- Absolute error : 0.008007
+-- Relative error : 0.002549
 
-* Mean estimation of PI with 1000000 simulations and 40 experiments : 3.139764
--- Absolute error : 0.000233 
--- Relative error : 0.000074
+* Mean estimation of PI with 1000000 simulations and 30 experiments : 3.141292
+-- Absolute error : 0.000719 
+-- Relative error : 0.000229
 
-* Mean estimation of PI with 10000000 simulations and 40 experiments : 3.141030
--- Absolute error : 0.000108 
--- Relative error : 0.000034
-Enter the number of replicates (experiments) : 30
+* Mean estimation of PI with 10000000 simulations and 30 experiments : 3.141992
+-- Absolute error : 0.000003 
+-- Relative error : 0.000001
 
+-- Computing independent experiments and obtaining the mean
 
- -- Mean Estimation with 1000 simulations and 30 replicates: 3.146667
+* Mean estimation of PI with 1000 simulations and 40 experiments : 3.144000
+-- Absolute error : 0.003693
+-- Relative error : 0.001175
 
-* Estimated standard Deviation: 0.003572
+* Mean estimation of PI with 1000000 simulations and 40 experiments : 3.141988
+-- Absolute error : 0.000173 
+-- Relative error : 0.000055
 
-* 99% Confidence Interval: [3.116658-3.176675]
+* Mean estimation of PI with 10000000 simulations and 40 experiments : 3.140919
+-- Absolute error : 0.000093 
+-- Relative error : 0.000030
+Enter the number of replicates (experiments) : 40
+
+ -- Mean Estimation with 1000 simulations and 40 replicates: 3.134600
+
+* Estimated standard Deviation: 0.002910
+
+* 99% Confidence Interval: [3.112628-3.156572]

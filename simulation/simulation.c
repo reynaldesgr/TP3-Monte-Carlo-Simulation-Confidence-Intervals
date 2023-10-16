@@ -46,14 +46,14 @@ double simPi(int numSimulations)
 {
     double xr, yr;
     int    i;
-    int    nbPointsInCircle;
+    double nbPointsInCircle;
 
-    nbPointsInCircle = 0;
+    nbPointsInCircle = 0.;
 
     for (i = 0; i < numSimulations; i++)
     {
-        xr = uniform(0, 1);
-        yr = uniform(0, 1);
+        xr = genrand_real1();
+        yr = genrand_real1();
 
         if ( (xr*xr) + (yr*yr) <= 1)
         {

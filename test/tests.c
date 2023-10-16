@@ -48,7 +48,7 @@ void testSimPi()
 
     printf("\n -- Approximation de PI par Monte Carlo --\n");
 
-    for (int i = 2; i < 3; i++)
+    for (int i = 0; i < 3; i++)
     {
         estimatedPi = simPi(numSimulations[i]);
         printf("\n * Estimation with %d points : estimated PI = %f\n",  numSimulations[i], estimatedPi);
