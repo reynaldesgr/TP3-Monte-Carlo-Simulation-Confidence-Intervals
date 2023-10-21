@@ -10,9 +10,9 @@ int main (void)
     init_by_array(init, length);
     
     // 1 - SimPi function
-    //testSimPi();
+    testSimPi();
 
-   /* // 2 - Independent experiments
+    // 2 - Independent experiments
 
     //Number of replicates = 10
     testMeanPi(10);
@@ -22,15 +22,9 @@ int main (void)
 
     // Number of replicates = 40
     testMeanPi(40);
-    */
-
-   for (int i = 10; i <= 40; i+=5)
-   {
-        testMeanPi(i);
-   }
 
     // 3 - Confidence intervals
-   // testConfidenceInterval();
+    testConfidenceInterval();
 
     return 0;
 }

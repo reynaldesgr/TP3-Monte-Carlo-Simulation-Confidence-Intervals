@@ -35,9 +35,12 @@ double calculateEstimatedVariance(double * X, double meanX, int n)
 
     for (int i = 0; i < n; i++)
     {
+        // For each element, calculate the square of the difference between a element and the mean
         sum += (X[i] - meanX) * (X[i] - meanX);
     }
-    estimatedVariance = sum / (n - 1);
 
+    // Calculate the estimated variance by dividing the sum by (n - 1)
+    estimatedVariance = sum / (n - 1);
+    
     return estimatedVariance;
 }

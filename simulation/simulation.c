@@ -48,6 +48,7 @@ double simPi(int numSimulations)
     int    i;
     double nbPointsInCircle;
 
+    // Initialize the count of points in the circle to zero.
     nbPointsInCircle = 0.;
 
     for (i = 0; i < numSimulations; i++)
@@ -55,11 +56,14 @@ double simPi(int numSimulations)
         xr = genrand_real1();
         yr = genrand_real1();
 
+        // Check if the point (xr, yr) is inside the unit circle (radius = 1)
         if ( (xr*xr) + (yr*yr) <= 1)
         {
+            // Increment the count if the point is inside
             nbPointsInCircle++;
         }
     }
 
+    // Calculate an estimate of pi
     return 4. * ( (double) (nbPointsInCircle / numSimulations) );
 }

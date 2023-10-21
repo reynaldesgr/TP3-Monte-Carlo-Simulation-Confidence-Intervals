@@ -43,12 +43,12 @@ const double alpha_0_01_values[] = {
 
 void testSimPi()
 {
-    int    numSimulations[] = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 1000000000};
+    int    numSimulations[] = {1000, 1000000, 1000000000};
     double estimatedPi;
 
     printf("\n -- Pi Approximation by Monte Carlo method --\n");
 
-    for (int i = 0; i < 19; i++)
+    for (int i = 0; i < 3; i++)
     {
         estimatedPi = simPi(numSimulations[i]);
         printf("\n * Estimation with %d points : estimated PI = %f\n",  numSimulations[i], estimatedPi);
@@ -73,15 +73,17 @@ void testMeanPi(int numExperiments)
     double absoluteError;
     double relativeError;
 
+    // Number of simulations to perform
     int    numSimulations[] = {1000, 1000000, 1000000000};
     double meanPi[3]        = {0.};
 
-    //printf ("\n-- Computing independent experiments and obtaining the mean\n");
+    printf ("\n-- Computing independent experiments and obtaining the mean\n");
 
     int i, j;
     
     for (i = 0; i < 3; i++)
     {
+        // Compute numExperiments times numSimulations
         for (j = 0; j < numExperiments; j++)
         {
             estimatedPi = simPi(numSimulations[i]);
@@ -96,7 +98,10 @@ void testMeanPi(int numExperiments)
         relativeError = absoluteError / M_PI;
 
         // Display tests results
-        printf("(numSimulation : %d, replicate : %d,  absoluteError : %f)\n", numSimulations[i], numExperiments, absoluteError);
+        printf("* Mean estimation of PI with %d simulations and %d experiments/replicates : %f\n", numSimulations[i], numExperiments, estimatedPi);
+        printf("-- Absolute error : %f\n", absoluteError);
+        printf("-- Relative error : %f\n", relativeError);
+       
     }
 
 }
@@ -120,41 +125,38 @@ void testConfidenceInterval()
 
     double meanPi;
 
-    int    numReplicates[49] = {100, 200, 300, 400, 500, 600, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900,3000, 3100, 3200, 3300, 3400, 3500, 3600, 3700, 3800, 3900, 4000, 4100, 4200, 4300, 4400, 4500, 4600, 4700, 4800, 4900, 5000};
+    int    numReplicates;
     int    numSimulations = 1000;
 
-    /*printf("Enter the number of replicates (experiments) : ");
-    scanf("%d", &numReplicates);*/
+    printf("Enter the number of replicates (experiments) : ");
+    scanf("%d", &numReplicates);
 
     int i;
-    for (int k = 0; k < 49; k++)
+
+    for (i = 0; i < numReplicates; i++)
     {
-        for (i = 0; i < numReplicates[k]; i++)
-        {
-            estimatedPi[i] = simPi(numSimulations);
-            meanPi      += estimatedPi[i];
-        }
-        
-        // Compute the mean
-        meanPi = meanPi / numReplicates[k];
-
-        estimatedStdDeviation = calculateEstimatedVariance(estimatedPi, meanPi, numReplicates[k]);
-        
-        if (numReplicates[k] < 30)
-        {
-            criticalValue = alpha_0_01_values[numReplicates[k] - 1];
-        }
-        else
-        {
-            criticalValue = 2.576; // for n -> infinity
-        }
-
-        confidenceValue = criticalValue * sqrt(estimatedStdDeviation / numReplicates[k]);
-
-        /*printf("\n -- Mean Estimation with %d simulations and %d replicates: %f\n", numSimulations, numReplicates[k], meanPi);
-        printf("\n* Estimated standard Deviation: %f\n", estimatedStdDeviation);
-        printf("\n* 99%% Confidence Interval: [%f - %f] \n", meanPi - confidenceValue, meanPi + confidenceValue);*/
-
-        //printf("Replication : %d (%f, lower bound : %f,  upper bound : %f) \n", numReplicates[k], meanPi, meanPi  - confidenceValue, meanPi + confidenceValue);
+        estimatedPi[i] = simPi(numSimulations);
+        meanPi      += estimatedPi[i];
     }
+        
+    // Compute the mean
+    meanPi = meanPi / numReplicates;
+
+    estimatedStdDeviation = calculateEstimatedVariance(estimatedPi, meanPi, numReplicates);
+        
+    if (numReplicates < 30)
+    {
+        criticalValue = alpha_0_01_values[numReplicates - 1];
+    }
+    else
+    {
+        criticalValue = 2.576; // for n -> infinity
+    }
+
+    confidenceValue = criticalValue * sqrt(estimatedStdDeviation / numReplicates);
+
+    printf("\n -- Mean Estimation with %d simulations and %d replicates: %f\n", numSimulations, numReplicates, meanPi);
+    printf("\n* Estimated standard Deviation: %f\n", estimatedStdDeviation);
+    printf("\n* 99%% Confidence Interval: [%f - %f] \n", meanPi - confidenceValue, meanPi + confidenceValue);
+
 }
