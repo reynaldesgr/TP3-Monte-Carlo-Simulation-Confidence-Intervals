@@ -8,25 +8,29 @@ int main (void)
     // Always initialize the MT generator
     unsigned long init[4]={0x123, 0x234, 0x345, 0x456}, length=4;
     init_by_array(init, length);
-
+    
     // 1 - SimPi function
     //testSimPi();
 
-    // 2 - Independent experiments
+   /* // 2 - Independent experiments
 
     //Number of replicates = 10
     testMeanPi(10);
-    testMeanPi(15);
-    testMeanPi(20);
-    testMeanPi(25);
+
     // Number of replicates = 30
     testMeanPi(30);
-    testMeanPi(35);
+
     // Number of replicates = 40
     testMeanPi(40);
+    */
+
+   for (int i = 10; i <= 40; i+=5)
+   {
+        testMeanPi(i);
+   }
 
     // 3 - Confidence intervals
-    testConfidenceInterval();
+   // testConfidenceInterval();
 
     return 0;
 }
