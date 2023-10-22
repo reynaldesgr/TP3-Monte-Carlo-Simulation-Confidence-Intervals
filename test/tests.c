@@ -57,6 +57,31 @@ void testSimPi()
 }
 
 /**
+ * @brief Perform multiple simulations to estimate the value of pi using a Monte Carlo method in 3D space.
+ *
+ * This function performs multiple simulations to estimate the value of pi using a Monte Carlo method
+ * in a 3D space. It uses different numbers of random points to calculate pi estimates for each simulation.
+ *
+ * @details It prints the estimated values of pi for each simulation.
+ */
+
+void testSimPi3D()
+{
+    int    numSimulations[] = {1000, 1000000, 1000000000};
+    double estimatedPi;
+
+    printf("\n -- Pi Approximation by Monte Carlo method (in 3-Dimension) --\n");
+
+    for (int i = 0; i < 3; i++)
+    {
+        estimatedPi = simPi(numSimulations[i]);
+        printf("\n * Estimation with %d points : estimated PI = %f\n",  numSimulations[i], estimatedPi);
+    }
+    
+}
+
+
+/**
  * @brief Test and perform multiple independent replicates to obtain the mean
  * estimate of pi.
  * 

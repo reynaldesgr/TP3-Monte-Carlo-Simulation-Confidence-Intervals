@@ -6,5 +6,6 @@
 #define NMAX        10000
 // Randomess
 double uniform                  (double a, double b);
-double simPi                    (int numSimulations);
+double simPi                    (int numPointsToDraw);
+double simPi3D                  (int numPointsToDraw);
 #endif

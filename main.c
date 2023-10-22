@@ -10,7 +10,12 @@ int main (void)
     init_by_array(init, length);
     
     // 1 - SimPi function
+
+    // Circle
     testSimPi();
+    
+    // Sphere
+    testSimPi3D();
 
     // 2 - Independent experiments
 
