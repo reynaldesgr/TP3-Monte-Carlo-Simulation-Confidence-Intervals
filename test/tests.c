@@ -142,6 +142,8 @@ void testMeanPi(int numExperiments)
 
 void testConfidenceInterval()
 {
+    double SEM;
+
     double estimatedPi[NMAX];
     double estimatedStdDeviation;
 
@@ -180,8 +182,11 @@ void testConfidenceInterval()
 
     confidenceValue = criticalValue * sqrt(estimatedStdDeviation / numReplicates);
 
-    printf("\n -- Mean Estimation with %d simulations and %d replicates: %f\n", numSimulations, numReplicates, meanPi);
-    printf("\n* Estimated standard Deviation: %f\n", estimatedStdDeviation);
-    printf("\n* 99%% Confidence Interval: [%f - %f] \n", meanPi - confidenceValue, meanPi + confidenceValue);
+    SEM             = estimatedStdDeviation / sqrt(numReplicates);
+    
+    //printf("\n -- Mean Estimation with %d simulations and %d replicates: %f\n", numSimulations, numReplicates, meanPi);
+    //printf("\n* Estimated standard Deviation: %f\n", estimatedStdDeviation);
+    printf("\n* Standard error (SEM) : %f", SEM);
+    //printf("\n* 99%% Confidence Interval: [%f - %f] \n", meanPi - confidenceValue, meanPi + confidenceValue);
 
 }
