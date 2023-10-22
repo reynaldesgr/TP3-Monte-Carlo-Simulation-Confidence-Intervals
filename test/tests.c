@@ -152,9 +152,11 @@ void testConfidenceInterval()
 
     double meanPi;
 
+    // Variables for user input
     int    numReplicates;
     int    numSimulations = 1000;
 
+    // Prompt the user to enter the number of replicates (experiments)
     printf("Enter the number of replicates (experiments) : ");
     scanf("%d", &numReplicates);
 
@@ -166,24 +168,29 @@ void testConfidenceInterval()
         meanPi      += estimatedPi[i];
     }
         
-    // Compute the mean
+    // Compute the mean Pi
     meanPi = meanPi / numReplicates;
 
+    // Calculate the estimated standard deviation
     estimatedStdDeviation = calculateEstimatedVariance(estimatedPi, meanPi, numReplicates);
         
+    // Determine the critical value based on the number of replicates
     if (numReplicates < 30)
     {
         criticalValue = alpha_0_01_values[numReplicates - 1];
     }
     else
     {
-        criticalValue = 2.576; // for n -> infinity
+        criticalValue = 2.576; // A critical value for large n (infinity)
     }
 
+    // Calculate the confidence value using the critical value and standard deviation
     confidenceValue = criticalValue * sqrt(estimatedStdDeviation / numReplicates);
 
+    // Calculate the standard error (SEM)
     SEM             = estimatedStdDeviation / sqrt(numReplicates);
     
+    // Output the results
     printf("\n -- Mean Estimation with %d simulations and %d replicates: %f\n", numSimulations, numReplicates, meanPi);
     printf("\n* Estimated standard Deviation: %f\n", estimatedStdDeviation);
     printf("\n* Standard error (SEM) : %f", SEM);
